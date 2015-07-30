@@ -20,17 +20,5 @@ RUN curl --fail --silent --location --retry 3 \
     -type f -exec chmod 644 {} \; \
     && rm /tmp/nexus-apt-plugin-1.0.2-bundle.zip
 
-RUN mkdir -p ${SONATYPE_WORK}/.gnupg
-COPY ./gnupg/* /tmp/gnupg/
-RUN chown  -R nexus /tmp/gnupg 
-
-RUN cp -r /tmp/gnupg ${SONATYPE_WORK}/.gnupg \
-    && find ${SONATYPE_WORK}/.gnupg -type d -exec chmod 755 {} \; 
-
-RUN rm -rf /tmp/gnupg
-
-RUN echo "hello world" > ${SONATYPE_WORK}/test
-
-
 USER nexus
 
